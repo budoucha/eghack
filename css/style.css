@@ -1,0 +1,39 @@
+#main {
+    display: -webkit-flex;
+    display: flex;
+}
+#left_nav{
+    width: 370px;
+    border-right: 1px solid #222;
+    background-color: #888;
+}
+#content{
+    -webkit-flex: 1;
+    flex: 1;
+    background-color: #fff;
+}
+
+.content_item_wrap{
+    margin-left: 20px;
+}
+
+.content_item{
+    display: block;
+    text-align: center;
+    float: left;
+    margin-right: 15px;
+    width: 99px;
+    height: 99px;
+    background-color: #ccc;
+    border: 1px solid #333;
+    margin-bottom: 15px;
+}
+
+.content_item:nth-child(3n){
+    margin-left: 0px;
+}
+
+.sortable{
+    width: 100%;
+    height: 100%;
+}
