@@ -12,6 +12,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.ckeditor.com/4.7.2/standard/ckeditor.js"></script>
+    <script src="./js/getCurrentContentHTML.js"></script>
     <script src="./js/main.js"></script>
 </head>
 
@@ -47,7 +48,10 @@
             </div>
         </div>
         <div id="content">
-            <div class="sortable ui-widget-content">
+            <div id="workspace_header">
+                <p id="save">save</p>
+            </div>
+            <div id="workspace" class="sortable ui-widget-content">
             </div>
         </div>
     </div>
