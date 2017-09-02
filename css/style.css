@@ -12,12 +12,27 @@
     border-right: 1px solid #222;
     background-color: #888;
     z-index: 100;
+    height: 100vh;
 }
 #content{
     -webkit-flex: 1;
     flex: 1;
     background-color: #fff;
     z-index: 20;
+}
+
+#content #workspace_header{
+    width: 100%;
+    height: 50px;
+    border-bottom: 3px solid #333;
+}
+
+#content #workspace_header p{
+    padding: 10px;
+    display: block;
+    background-color: #999;
+    border: 1px solid #222;
+    float: right;
 }
 
 .content_item_wrap{
