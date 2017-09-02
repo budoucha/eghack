@@ -13,14 +13,11 @@ $( function() {
         cursor: "move",
         helper: "clone",
         stop: function(event, ui) {
-            // var text = $(".sortable").append('<p>テスト</p>');
-            // ui.item.css("display", "block");
-
-            // $sortable.apped();
             _clientX = event.clientX - 370;
-            _clientY = event.clientY;
-            $sortable.append(getItemHtml($(this), event)); // html取得
-
+            _clientY = event.clientY - 50;
+            $itemHtml = $(getItemHtml($(this), event));
+            $itemHtml.draggable();
+            $sortable.append($itemHtml);
             console.log(event);
         }
     });
