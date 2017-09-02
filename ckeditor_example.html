@@ -1,0 +1,22 @@
+<html>
+<head>
+</head>
+<body>
+  <!-- divタグ(inputタグではない)に "contenteditable" 属性を "true" で付与 -->
+  <div id="formId" type="text" style="border: solid 1px #000000;" contenteditable="true"></div>
+  <button id="button">read!</button>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="http://cdn.ckeditor.com/4.7.2/basic/ckeditor.js"></script> <!-- ckeditor の CDN を追加 -->
+  <script>
+  // IDを指定("#"は要らない)
+  CKEDITOR.inline('formId');
+
+  // 入力されている値の取得
+  $("#button").on("click", function(){
+    // CKEDITOR.instances.フォームのID.getData() で値を取得
+    alert(CKEDITOR.instances.formId.getData())
+  })
+  </script>
+</body>
+</html>
