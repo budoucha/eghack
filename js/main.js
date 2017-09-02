@@ -7,6 +7,8 @@ $( function() {
     var _clientX;
     var _clientY;
 
+    var _input;
+
     $( ".content_item" ).draggable({
         cursor: "move",
         helper: "clone",
@@ -45,9 +47,9 @@ $( function() {
         return _html;
     }
 
+
     // p -> input
     $(document).on("click", ".textform", function(){
-        // var offset =  $(this).offset();
         _clientX = $(this).css("left");
         _clientY = $(this).css("top");
 
@@ -55,20 +57,26 @@ $( function() {
         var _left = "left:" + _clientX + ";";
         var _top = "top:" + _clientY + ";";
         var _style =  _position + _left + _top;
-        $(this).replaceWith("<input class='_textform' value='"+ text +"' style='"+ _style +"''></input>");
+        $(this).replaceWith("<div class='textform' style='"+ _style +"'>"+text+"</div>");
+
+        _input = $(".textform").summernote({focus: true});
+        // _input = $(this);
+        var saveButton = "<div class='formSave' style='display:block;padding-top:15px;padding-bottom:15px;background-color:#4499ff;width:70px;text-align:center;border:1px solid #2222ff'>save</div>"
+        $sortable.append(saveButton);
     });
 
-    // input -> p
-    $(document).on("focusout", "._textform", function(){
-        // var offset =  $(this).offset();
-        _clientX = $(this).css("left");
-        _clientY = $(this).css("top");
-        console.log(123);
-        var text = $(this).val();
-        var _left = "left:" + _clientX + ";";
-        var _top = "top:" + _clientY + ";";
-        var _style =  _position + _left + _top;
-        $(this).replaceWith("<p class='textform' style='"+ _style +"'>"+ text +"</p>");
+    // text click時の処理
+    // $(document).on("click", "._textform", function(){
+    //     $(this).summernote({focus: true});
+    //
+    //     _input = $(this);
+    //     var saveButton = "<div class='formSave' style='display:block;padding-top:15px;padding-bottom:15px;background-color:#4499ff;width:70px;text-align:center;border:1px solid #2222ff'>save</div>"
+    //     $sortable.append(saveButton);
+    // });
+
+    $(document).on("click", ".formSave", function(){
+        _input.summernote('destroy');
+        $(this).remove();
     });
 
 
