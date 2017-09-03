@@ -25,7 +25,14 @@ $( function() {
             $itemHtml.addClass("created_item");
             $(".created_item").removeClass("active");
             $itemHtml.addClass("active");
-            $itemHtml.draggable();
+            $itemHtml.draggable({
+                stop: function() {
+                    history.stack_push(); // 移動時プッシュ
+                }
+            });
+            
+            history.stack_push(); // 生成時プッシュ
+            
             $sortable.append($itemHtml);
             //console.log(event);
         }
@@ -77,6 +84,7 @@ $( function() {
     $(window).keydown(function(event){
       if (event.keyCode === 8 || event.keyCode === 46) {
         $(".active").remove();
+        history.stack_push(); // 削除時プッシュ
       }
     });
 
