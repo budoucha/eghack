@@ -10,7 +10,7 @@ $( function() {
     var canDrag = true;
 
     var _input;
-    
+
     var url = " ";
 
     //item_をドラックできるようにしている
@@ -70,7 +70,10 @@ $( function() {
         }
         //socialのアイコンを追加
         else if(item.attr("id")=="item_social"){
-            _html = "<div style='"+ _style +"'><a href='https://twitter.com/?lang=ja' target = '_blank' style='margin-right:1px'> <img src='image/twitter.png' alt='twitter_icon' border='0' width = '20' height = '20'></a><a href='https://www.facebook.com/' target = '_blank' style='margin'> <img src='image/facebook.png' alt='facebook_icon' border='0' width = '28' height = '28'></a><a href='https://plus.google.com/' target = '_blank' style='margin-left:1px'> <img src='image/google_plus.png' alt='googleplus_icon' border='0' width = '20' height = '20'></a></div>"
+            var twitterUrl = prompt("twitterのurlを指定してください", "https://");
+            var facebookUrl = prompt("facebookのurlを指定してください", "https://");
+            var googlePlusUrl = prompt("google plusのurlを指定してください", "https://");
+            _html = "<div style='"+ _style +"'><a href='"+twitterUrl+"' target = '_blank' style='margin-right:1px'> <img src='image/twitter.png' alt='twitter_icon' border='0' width = '20' height = '20'></a><a href='"+ facebookUrl +"' target = '_blank' style='margin'> <img src='image/facebook.png' alt='facebook_icon' border='0' width = '28' height = '28'></a><a href='"+googlePlusUrl+"' target = '_blank' style='margin-left:1px'> <img src='image/google_plus.png' alt='googleplus_icon' border='0' width = '20' height = '20'></a></div>"
         }
 
         return _html;
