@@ -156,9 +156,6 @@ $( function() {
     // 履歴関連
     var history = new History();
 
-    $(document).on('click', '#push', function () {
-        history.stack_push();
-    });
     $(document).on('click', '#undo', function () {
         history.undo();
     });
