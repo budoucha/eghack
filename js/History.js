@@ -14,16 +14,17 @@ function History() {
         if(this.undo_stack.length > 0){
             this.htmlstr_res = this.undo_stack.pop();
             this.redo_stack.push(this.htmlstr_res);
+            overWriteHTML(this.htmlstr_res);
         }
         if (this.redo_stack.length > 11) {
             this.redo_stack.shift();
         }
-        return this.htmlstr_res;
     }
     this.redo = function () {
         if(this.redo_stack.length > 0){            
             this.htmlstr_res = this.redo_stack.pop();
             this.undo_stack.push(this.htmlstr_res);
+            overWriteHTML(this.htmlstr_res);            
         }
     }
 }
