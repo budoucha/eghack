@@ -11,13 +11,20 @@ $(function () {
 
     var _input;
 
-    $(".content_item").draggable({
+    var url = " ";
+
+    $( ".content_item" ).draggable({
         cursor: "move",
         helper: "clone",
         stop: function (event, ui) {
             _clientX = event.clientX - 370;
             _clientY = event.clientY - 50;
             $itemHtml = $(getItemHtml($(this), event));
+
+            $itemHtml.addClass("created_item");
+            $(".created_item").removeClass("active");
+            $itemHtml.addClass("active");
+
             $itemHtml.draggable();
             $sortable.append($itemHtml);
             //console.log(event);
@@ -48,10 +55,25 @@ $(function () {
         } else if (item.attr("id") === "item_image") { // image
             // _style += "width:99;height:99;";
             _html = "<input type='file' class='imageDrop' style='" + _style + "'><img style='position:absolute' class='noimage' src='' /></input>";
+        } else if(item.attr("id") === "item_button"){
+            url=prompt("urlを入力して下さい", "https://");
+            var buttonName = prompt("ボタン名を入力して下さい", "ボタン名");
+            _style += "padding: 12px; padding-right:100px; padding-left:100px; display:block; text-decoraion:none; border:1px solid #333;";
+            _html = "<a href='"+ url +"' class='button' target='_blank' style='"+ _style +"'>"+ buttonName +"</a>";
         }
         return _html;
     }
 
+    $(document).on("click", ".created_item", function(){
+      $(".created_item").removeClass("active");
+      $(this).addClass("active");
+    });
+
+    $(window).keydown(function(event){
+      if (event.keyCode === 8 || event.keyCode === 46) {
+        $(".active").remove();
+      }
+    });
 
     /**
     * サマーノートを開く、saveButtonの作成
@@ -113,8 +135,9 @@ $(function () {
                 isHeightResize: true // 垂直方向のリサイズのON/OFF
             });
         }
-
     });
+
+    // 履歴関連
     var history = new History();
 
     $(document).on('click', '#push', function () {
