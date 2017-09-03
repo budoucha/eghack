@@ -27,16 +27,22 @@
     border-bottom: 1px solid #999;
 }
 
-#content #workspace_header p{
+#content #workspace_header p, #content #workspace_header a{
     padding: 10px;
     display: block;
-    background: #88bbff;
-    background: linear-gradient(#88bbff, 75%, #446688);
+    background: #8EB8FF;
+/*    background: linear-gradient(#A7F1FF, 75%, #00ECFF);*/
     border: 1px solid #6699FF;
     float: right;
     margin-top: 3px;
     margin-right: 3px;
+    color: white;
 }
+
+#content #workspace_header p:hover{
+    background:#005FFF;
+}
+
 
 .content_item_wrap {
     margin-left: 20px;
