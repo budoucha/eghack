@@ -1,4 +1,4 @@
-$( function() {
+$(function () {
 
     var $sortable = $(".sortable");
 
@@ -11,21 +11,21 @@ $( function() {
 
     var _input;
 
-    $( ".content_item" ).draggable({
+    $(".content_item").draggable({
         cursor: "move",
         helper: "clone",
-        stop: function(event, ui) {
+        stop: function (event, ui) {
             _clientX = event.clientX - 370;
             _clientY = event.clientY - 50;
             $itemHtml = $(getItemHtml($(this), event));
             $itemHtml.draggable();
             $sortable.append($itemHtml);
-            console.log(event);
+            //console.log(event);
         }
     });
     $sortable.droppable({
         tolerance: "intersect",
-        drop: function( event, ui ) {
+        drop: function (event, ui) {
 
         }
     });
@@ -36,18 +36,18 @@ $( function() {
     * @param  {[type]} _event dragイベント
     * @return {[string]}      html
     */
-    var getItemHtml = function(item, _event){
+    var getItemHtml = function (item, _event) {
         var _html;
         var _left = "left:" + _clientX + "px;";
         var _top = "top:" + _clientY + "px;";
-        var _style =  _position + _left + _top;
+        var _style = _position + _left + _top;
 
         // text
-        if(item.attr("id") === "item_text"){
-            _html = "<div class='textform' style='"+ _style +"'>text</div>";
-        } else if(item.attr("id") === "item_image"){ // image
+        if (item.attr("id") === "item_text") {
+            _html = "<div class='textform' style='" + _style + "'>text</div>";
+        } else if (item.attr("id") === "item_image") { // image
             // _style += "width:99;height:99;";
-            _html = "<input type='file' class='imageDrop' style='"+ _style +"'><img style='position:absolute' class='noimage' src='' /></input>";
+            _html = "<input type='file' class='imageDrop' style='" + _style + "'><img style='position:absolute' class='noimage' src='' /></input>";
         }
         return _html;
     }
@@ -57,24 +57,24 @@ $( function() {
     * サマーノートを開く、saveButtonの作成
     * @return {[type]} [description]
     */
-    $(document).on("click", ".textform", function(){
+    $(document).on("click", ".textform", function () {
 
-        if(!_input){
-            _input = $(this).summernote({focus: true});
+        if (!_input) {
+            _input = $(this).summernote({ focus: true });
             // _input = $(this);
             var saveButton = "<div class='formSave' style='display:block;padding-top:15px;padding-bottom:15px;background-color:#4499ff;width:70px;text-align:center;border:1px solid #2222ff'>save</div>"
             $sortable.append(saveButton);
         }
     });
 
-    $(document).on("click", ".formSave", function(){
+    $(document).on("click", ".formSave", function () {
         _input.summernote('destroy');
         $(this).remove();
         _input = undefined;
     });
 
     // inputからfileを取得して画像を表示
-    $(document).on("change", ".imageDrop", function(){
+    $(document).on("change", ".imageDrop", function () {
         if (this.files.length > 0) {
             // 選択されたファイル情報を取得
             var file = this.files[0];
@@ -83,8 +83,8 @@ $( function() {
             var reader = new FileReader();
             reader.readAsDataURL(file);
 
-            reader.onload = function() {
-                var $noimage = $('.noimage').attr('src', reader.result );
+            reader.onload = function () {
+                var $noimage = $('.noimage').attr('src', reader.result);
                 $noimage.addClass("thumbnail");
                 $noimage.css("border", "none");
                 $noimage.removeClass("noimage");
@@ -93,13 +93,13 @@ $( function() {
         }
     });
 
-    $(document).on("dblclick", ".thumbnail", function(){
+    $(document).on("dblclick", ".thumbnail", function () {
         canDrag = !canDrag;
-        if(canDrag){
+        if (canDrag) {
             $(this).draggable("enable");
             $(this).funcResizeBox({
-                isWidthResize:false, // 水平方向のリサイズのON/OFF
-                isHeightResize:false // 垂直方向のリサイズのON/OFF
+                isWidthResize: false, // 水平方向のリサイズのON/OFF
+                isHeightResize: false // 垂直方向のリサイズのON/OFF
             });
         } else {
             $(this).draggable("disable");
@@ -109,11 +109,38 @@ $( function() {
                 maxWidth: 10000,    // リサイズ可能な最大の幅(px)
                 maxHeight: 10000,   // リサイズ可能な最大の高さ(px)
                 mouseRange: 20,     // リサイズイベントを取得する範囲(px)
-                isWidthResize:true, // 水平方向のリサイズのON/OFF
-                isHeightResize:true // 垂直方向のリサイズのON/OFF
+                isWidthResize: true, // 水平方向のリサイズのON/OFF
+                isHeightResize: true // 垂直方向のリサイズのON/OFF
             });
         }
 
     });
+    var history = new History();
 
-} );
+    $(document).on('click', '#push', function () {
+        history.stack_push();
+    });
+    $(document).on('click', '#undo', function () {
+        history.undo();
+    });
+    $(document).on('click', '#redo', function () {
+        history.redo();
+    });
+
+    $(window).keydown(function(e){
+        if(event.ctrlKey){
+          if(e.keyCode === 90){
+            history.undo();
+            return false;
+          }
+        }
+    });
+    $(window).keydown(function(e){
+        if(event.ctrlKey){
+          if(e.keyCode === 89){
+            history.redo();
+            return false;
+          }
+        }
+    });
+});
