@@ -18,6 +18,11 @@ $( function() {
             _clientX = event.clientX - 370;
             _clientY = event.clientY - 50;
             $itemHtml = $(getItemHtml($(this), event));
+
+            $itemHtml.addClass("created_item");
+            $(".created_item").removeClass("active");
+            $itemHtml.addClass("active");
+
             $itemHtml.draggable();
             $sortable.append($itemHtml);
             console.log(event);
@@ -52,6 +57,16 @@ $( function() {
         return _html;
     }
 
+    $(document).on("click", ".created_item", function(){
+      $(".created_item").removeClass("active");
+      $(this).addClass("active");
+    });
+
+    $(window).keydown(function(event){
+      if (event.keyCode === 8 || event.keyCode === 46) {
+        $(".active").remove();
+      }
+    });
 
     /**
     * サマーノートを開く、saveButtonの作成
@@ -115,5 +130,4 @@ $( function() {
         }
 
     });
-
 } );
