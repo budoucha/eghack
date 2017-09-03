@@ -30,9 +30,9 @@ $( function() {
                     history.stack_push(); // 移動時プッシュ
                 }
             });
-            
+
             history.stack_push(); // 生成時プッシュ
-            
+
             $sortable.append($itemHtml);
             //console.log(event);
         }
@@ -55,7 +55,6 @@ $( function() {
         var _left = "left:" + _clientX + "px;";
         var _top = "top:" + _clientY + "px;";
         var _style =  _position + _left + _top;
-        var _style = _position + _left + _top;
         // text
         if (item.attr("id") === "item_text") {
             _html = "<div class='textform' style='" + _style + "'>text</div>";
@@ -69,7 +68,8 @@ $( function() {
             _html = "<a href='"+ url +"' class='button' target='_blank' style='"+ _style +"'>"+ buttonName +"</a>";
         }
         //socialのアイコンを追加
-        else if(item.attr("id")=="item_social"){
+        else if(item.attr("id") === "item_social"){
+            console.log(_clientY);
             var twitterUrl = prompt("twitterのurlを指定してください", "https://");
             var facebookUrl = prompt("facebookのurlを指定してください", "https://");
             var googlePlusUrl = prompt("google plusのurlを指定してください", "https://");
