@@ -66,6 +66,10 @@ $( function() {
         _input = undefined;
     });
 
+    var observer = new MutationObserver(function(record, _observer){
+      alert("muted!")
+    })
 
+    observer.observe($("#workspace")[0], {childList: true, attributes: false, characterData: true})
 
 } );
