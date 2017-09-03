@@ -27,7 +27,7 @@
     border-bottom: 1px solid #999;
 }
 
-#content #workspace_header p{
+#content #workspace_header p, #content #workspace_header a{
     padding: 10px;
     display: block;
     background: #88bbff;
