@@ -11,6 +11,8 @@ $( function() {
 
     var _input;
 
+    var url = " ";
+
     $( ".content_item" ).draggable({
         cursor: "move",
         helper: "clone",
@@ -48,6 +50,11 @@ $( function() {
         } else if(item.attr("id") === "item_image"){ // image
             // _style += "width:99;height:99;";
             _html = "<input type='file' class='imageDrop' style='"+ _style +"'><img style='position:absolute' class='noimage' src='' /></input>";
+        } else if(item.attr("id") === "item_button"){
+            url=prompt("urlを入力して下さい", "https://");
+            var buttonName = prompt("ボタン名を入力して下さい", "ボタン名");
+            _style += "padding: 12px; padding-right:100px; padding-left:100px; display:block; text-decoraion:none; border:1px solid #333;";
+            _html = "<a href='"+ url +"' class='button' target='_blank' style='"+ _style +"'>"+ buttonName +"</a>";
         }
         return _html;
     }
@@ -113,7 +120,5 @@ $( function() {
                 isHeightResize:true // 垂直方向のリサイズのON/OFF
             });
         }
-
     });
-
 } );
