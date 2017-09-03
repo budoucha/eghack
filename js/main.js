@@ -1,5 +1,5 @@
-$(function () {
-
+$( function() {
+    //表示させたい場所
     var $sortable = $(".sortable");
 
     var _position = "position:absolute;";
@@ -10,21 +10,21 @@ $(function () {
     var canDrag = true;
 
     var _input;
-
+    
     var url = " ";
 
+    //item_をドラックできるようにしている
     $( ".content_item" ).draggable({
         cursor: "move",
         helper: "clone",
         stop: function (event, ui) {
             _clientX = event.clientX - 370;
             _clientY = event.clientY - 50;
+          //下に飛ぶ(thisの中にid,classとかが入っている)
             $itemHtml = $(getItemHtml($(this), event));
-
             $itemHtml.addClass("created_item");
             $(".created_item").removeClass("active");
             $itemHtml.addClass("active");
-
             $itemHtml.draggable();
             $sortable.append($itemHtml);
             //console.log(event);
@@ -47,8 +47,8 @@ $(function () {
         var _html;
         var _left = "left:" + _clientX + "px;";
         var _top = "top:" + _clientY + "px;";
+        var _style =  _position + _left + _top;
         var _style = _position + _left + _top;
-
         // text
         if (item.attr("id") === "item_text") {
             _html = "<div class='textform' style='" + _style + "'>text</div>";
@@ -61,6 +61,11 @@ $(function () {
             _style += "padding: 12px; padding-right:100px; padding-left:100px; display:block; text-decoraion:none; border:1px solid #333;";
             _html = "<a href='"+ url +"' class='button' target='_blank' style='"+ _style +"'>"+ buttonName +"</a>";
         }
+        //socialのアイコンを追加
+        else if(item.attr("id")=="item_social"){
+            _html = "<div style='"+ _style +"'><a href='https://twitter.com/?lang=ja' target = '_blank' style='margin-right:1px'> <img src='image/twitter.png' alt='twitter_icon' border='0' width = '20' height = '20'></a><a href='https://www.facebook.com/' target = '_blank' style='margin'> <img src='image/facebook.png' alt='facebook_icon' border='0' width = '28' height = '28'></a><a href='https://plus.google.com/' target = '_blank' style='margin-left:1px'> <img src='image/google_plus.png' alt='googleplus_icon' border='0' width = '20' height = '20'></a></div>"
+        }
+
         return _html;
     }
 
