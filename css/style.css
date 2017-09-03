@@ -30,7 +30,8 @@
 #content #workspace_header p{
     padding: 10px;
     display: block;
-    background-color: #88bbff;
+    background: #88bbff;
+    background: linear-gradient(#88bbff, 75%, #446688);
     border: 1px solid #6699FF;
     float: right;
     margin-top: 3px;
