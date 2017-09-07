@@ -1,5 +1,5 @@
 function History() {
-    this.undo_stack = ["a"];
+    this.undo_stack = [];
     this.redo_stack = [];
     this.stack_push = function () {
         var current_ws = getCurrentContentHTML();
